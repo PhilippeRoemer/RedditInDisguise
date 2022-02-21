@@ -74,6 +74,11 @@ function App() {
                 setComments(res.data[1].data.children);
                 console.log("Post Top Comment: " + res.data[1].data.children[0].data.body);
                 console.log("Comment Reply: " + res.data[1].data.children[0].data.replies.data.children[0].data.body);
+
+                /*const Testing = res.data[1].data.children;
+                Testing.forEach((rpost) => {
+                    console.log(rpost);
+                }); */
             })
             .catch((errors) => {
                 console.error(errors);
@@ -81,6 +86,12 @@ function App() {
 
         console.log("Testing");
     };
+
+    /*    const fetchPosts = (e) => {
+        var animalType = e.target.getAttribute("data-idd");
+        console.log(animalType);
+        console.log("Testing");
+    }; */
 
     return (
         <div className="App">
@@ -111,6 +122,8 @@ function App() {
 
                     {/* Listed Posts */}
                     {posts.map((post) => {
+                        /* const length = 10; */
+
                         const title = post.data.title;
                         const id = post.data.id;
                         const url = post.data.url;
@@ -140,14 +153,21 @@ function App() {
                         New Email!
                     </p>
                     <div class="selectedEmail_Body">
-                        <img src="" id="thumbnail" className="selectedEmail_Thumbnail" />
-                        <p id="author"></p>
-                        <p id="created" className="emailDate"></p>
-                        <p id="selftext"></p>
-                        <p>
-                            To: <span id="subReddit"></span>
-                        </p>
+                        <div className="selectedEmail_Info">
+                            <div>
+                                <img src="" id="thumbnail" className="selectedEmail_Thumbnail" />
+                            </div>
+                            <div>
+                                {" "}
+                                <p id="author"></p>
+                                <p id="created" className="emailDate"></p>
+                                <p>
+                                    To: <span id="subReddit"></span>
+                                </p>
+                            </div>
+                        </div>
 
+                        <p id="selftext"></p>
                         {comments.map((post) => {
                             const redditPostComments = post.data.body;
 
