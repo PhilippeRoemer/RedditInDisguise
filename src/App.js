@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
+import OutlookMenuBar from "../src/images/OutlookMenuBar.jpg";
+import waffleIcon from "../src/images/waffleIcon.png";
+import searchIcon from "../src/images/searchIcon.png";
+import profileImage from "../src/images/profileImage.png";
+import emailButtons from "../src/images/emailButtons.png";
+import emailFilter from "../src/images/emailFilter.jpg";
+import foldersImage from "../src/images/foldersImage.png";
 
 function App() {
     const [posts, setPosts] = useState([]);
     const [comments, setComments] = useState([]);
 
-    /* On page load - Reddit data fetched */
     useEffect(() => {
         axios
             .get("https://www.reddit.com/.json")
@@ -20,7 +26,7 @@ function App() {
     }, []);
 
     const fetchPost = (e) => {
-        /* On post title clicked - Selects the Reddit post ID */
+        /* Selects the Reddit post ID */
         const redditPostID = e.currentTarget.id;
         console.log(redditPostID);
 
@@ -43,6 +49,14 @@ function App() {
         const postSubReddit = document.getElementById(redditPostID).dataset.subreddit;
         document.getElementById("subReddit").innerHTML = postSubReddit;
 
+        /* Displays Reddit post thumbnail */
+        const postThumbnail = document.getElementById(redditPostID).dataset.thumbnail;
+        document.getElementById("thumbnail").src = postThumbnail;
+
+        /* Displays Reddit post thumbnail */
+        const postCreatedTime = document.getElementById(redditPostID).dataset.created;
+        document.getElementById("created").innerHTML = postCreatedTime;
+
         axios
             .get("https://www.reddit.com" + permaLink + ".json")
             .then((res) => {
@@ -60,38 +74,78 @@ function App() {
 
     return (
         <div className="App">
-            <h1>testing</h1>
-            {/* Listed Posts */}
-            {posts.map((post) => {
-                const title = post.data.title;
-                const id = post.data.id;
-                const url = post.data.url;
-                const permalink = post.data.permalink;
-                const author = post.data.author;
-                const subReddit = post.data.subreddit_name_prefixed;
-                const thumbnail = post.data.thumbnail;
-
-                return (
-                    <div onClick={fetchPost} id={id} data-url={url} data-permalink={permalink} data-title={title} data-author={author} data-subreddit={subReddit} data-thumbnail={thumbnail}>
-                        <p>{title}</p>
+            <div className="header">
+                <div className="homeSection">
+                    <img src={waffleIcon} className="waffleIcon" />
+                    <h3 className="outlookIcon">Outlook</h3>
+                    <div className="searchbarContainer">
+                        <input type="text" placeholder="Search" className="searchbar" />
+                        <img src={searchIcon} className="searchIcon" />
                     </div>
-                );
-            })}
-            {/* Selected Post */}
-            <h1 id="displayPostTitle"></h1>
-            <h2 id="subReddit"></h2>
-            <h3 id="author"></h3>
+                </div>
+                <div>
+                    <img src={OutlookMenuBar} className="outlookMenuIcons" />
+                    <img src={profileImage} className="profileImage" />
+                </div>
+            </div>
+            <div className="emailCommandToolbar">
+                <img src={emailButtons} />
+            </div>
 
-            {/* Selected Post Comments */}
-            {comments.map((post) => {
-                const redditPostComments = post.data.body;
+            <div className="emailContainer">
+                <div className="emailFolders">
+                    <img src={foldersImage} />
+                </div>
+                <div className="emails">
+                    <img src={emailFilter} />
 
-                return (
-                    <ul>
-                        <li>{redditPostComments}</li>
-                    </ul>
-                );
-            })}
+                    {/* Listed Posts */}
+                    {posts.map((post) => {
+                        const title = post.data.title;
+                        const id = post.data.id;
+                        const url = post.data.url;
+                        const permalink = post.data.permalink;
+                        const author = post.data.author;
+                        const subReddit = post.data.subreddit_name_prefixed;
+                        const thumbnail = post.data.thumbnail;
+                        const created = post.data.created;
+
+                        const truncateTitle = title.substring(0, 45) + "...";
+                        return (
+                            <div onClick={fetchPost} id={id} data-url={url} data-permalink={permalink} data-title={title} data-author={author} data-subreddit={subReddit} data-thumbnail={thumbnail} data-created={created} className="email">
+                                <p className="emailTitle">{truncateTitle}</p>
+                                <p>{author}</p>
+                                <p>{created}</p>
+                                <p className="emailSubreddit">{subReddit}</p>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                <div className="selectedEmail">
+                    <p className="selectedEmail_Title" id="displayPostTitle">
+                        New Email!
+                    </p>
+                    <div className="selectedEmail_Body">
+                        <img src="" id="thumbnail" className="selectedEmail_Thumbnail" />
+                        <p id="author"></p>
+                        <p id="created"></p>
+                        <p>
+                            To: <span id="subReddit"></span>
+                        </p>
+
+                        {comments.map((post) => {
+                            const redditPostComments = post.data.body;
+
+                            return (
+                                <ul>
+                                    <li>{redditPostComments}</li>
+                                </ul>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

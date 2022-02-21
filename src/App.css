@@ -1,3 +1,167 @@
 * {
     margin: 0;
+    font-family: "Segoe UI Web (West European)", Segoe UI, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.header {
+    height: 48px;
+    width: 100%;
+    background-color: #0078d4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.homeSection {
+    display: flex;
+    align-items: center;
+}
+
+.waffleIcon {
+    filter: invert(1);
+    height: 16px;
+    padding: 16px;
+}
+
+.outlookIcon {
+    color: #fff;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.searchbarContainer {
+    position: relative;
+}
+
+.searchbar {
+    background-color: #cce5f6;
+    border-radius: 3px;
+    border: none;
+    width: 300px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 30px;
+    margin-left: 20px;
+}
+
+.searchIcon {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    bottom: 8px;
+    left: 31px;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.searchbar:focus {
+    background-color: #fff;
+}
+
+.outlookMenuIcons {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.profileImage {
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 25px;
+}
+
+.emailCommandToolbar {
+    height: 48px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #f3f2f0;
+    padding-left: 15px;
+}
+
+.emailContainer {
+    display: flex;
+}
+
+.emailFolders {
+    width: 260px;
+    background-color: #f3f2f1;
+    border-right: 1px solid #edebe9;
+}
+
+.emails {
+    width: 370px;
+    border-right: 1px solid #edebe9;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.email {
+    font-size: 14px;
+    font-weight: normal;
+    color: #201f1e;
+    border-top: 1px solid #f3f2f1;
+    padding: 12px;
+}
+
+.email:hover {
+    background-color: #faf9f8;
+    cursor: pointer;
+}
+
+.emailTitle {
+    font-size: 15px;
+    margin-bottom: 2px;
+    color: #323130;
+}
+
+.emailAuthor {
+    font-size: 12px;
+}
+
+.emailSubreddit {
+    color: #605e5c;
+}
+
+.selectedEmail {
+    background-color: #faf9f8;
+    width: 100%;
+    height: 100vh;
+}
+
+.selectedEmail_Title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #323130;
+    padding-top: 17px;
+    padding-bottom: 12px;
+    padding-left: 15px;
+}
+
+.selectedEmail_Body {
+    background-color: #fff;
+    border: 1px solid #d0d0d0;
+    height: 100vh;
+    margin: 15px;
+}
+
+.selectedEmail_Thumbnail {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
 }
