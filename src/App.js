@@ -8,6 +8,7 @@ import profileImage from "../src/images/profileImage.png";
 import emailButtons from "../src/images/emailButtons.png";
 import emailFilter from "../src/images/emailFilter.jpg";
 import foldersImage from "../src/images/foldersImage.png";
+import redditLink from "../src/images/redditLink.png";
 
 function App() {
     const [posts, setPosts] = useState([]);
@@ -51,9 +52,18 @@ function App() {
 
         /* Displays Reddit post thumbnail */
         const postThumbnail = document.getElementById(redditPostID).dataset.thumbnail;
-        document.getElementById("thumbnail").src = postThumbnail;
 
-        /* Displays Reddit post thumbnail */
+        if (postThumbnail.startsWith("https")) {
+            document.getElementById("thumbnail").src = postThumbnail;
+        } else {
+            document.getElementById("thumbnail").src = redditLink;
+        }
+
+        /* Displays Reddit post selftext */
+        const postSelfText = document.getElementById(redditPostID).dataset.selftext;
+        document.getElementById("selftext").innerHTML = postSelfText;
+
+        /* Displays Reddit post created date and Time */
         const postCreatedTime = document.getElementById(redditPostID).dataset.created;
         document.getElementById("created").innerHTML = postCreatedTime;
 
@@ -88,15 +98,15 @@ function App() {
                     <img src={profileImage} className="profileImage" />
                 </div>
             </div>
-            <div className="emailCommandToolbar">
+            <div class="emailCommandToolbar">
                 <img src={emailButtons} />
             </div>
 
-            <div className="emailContainer">
-                <div className="emailFolders">
+            <div class="emailContainer">
+                <div class="emailFolders">
                     <img src={foldersImage} />
                 </div>
-                <div className="emails">
+                <div class="emails">
                     <img src={emailFilter} />
 
                     {/* Listed Posts */}
@@ -108,28 +118,32 @@ function App() {
                         const author = post.data.author;
                         const subReddit = post.data.subreddit_name_prefixed;
                         const thumbnail = post.data.thumbnail;
-                        const created = post.data.created;
+                        const selfText = post.data.selftext;
+                        const epochTime = new Date(post.data.created * 1000);
+
+                        const created = epochTime.toLocaleTimeString("en-US", { weekday: "short", year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", hour12: true });
 
                         const truncateTitle = title.substring(0, 45) + "...";
                         return (
-                            <div onClick={fetchPost} id={id} data-url={url} data-permalink={permalink} data-title={title} data-author={author} data-subreddit={subReddit} data-thumbnail={thumbnail} data-created={created} className="email">
+                            <div onClick={fetchPost} id={id} data-url={url} data-permalink={permalink} data-title={title} data-author={author} data-subreddit={subReddit} data-thumbnail={thumbnail} data-created={created} data-selftext={selfText} className="email">
                                 <p className="emailTitle">{truncateTitle}</p>
                                 <p>{author}</p>
-                                <p>{created}</p>
+                                {/*  <p>{created}</p> */}
                                 <p className="emailSubreddit">{subReddit}</p>
                             </div>
                         );
                     })}
                 </div>
 
-                <div className="selectedEmail">
-                    <p className="selectedEmail_Title" id="displayPostTitle">
+                <div class="selectedEmail">
+                    <p class="selectedEmail_Title" id="displayPostTitle">
                         New Email!
                     </p>
-                    <div className="selectedEmail_Body">
+                    <div class="selectedEmail_Body">
                         <img src="" id="thumbnail" className="selectedEmail_Thumbnail" />
                         <p id="author"></p>
-                        <p id="created"></p>
+                        <p id="created" className="emailDate"></p>
+                        <p id="selftext"></p>
                         <p>
                             To: <span id="subReddit"></span>
                         </p>

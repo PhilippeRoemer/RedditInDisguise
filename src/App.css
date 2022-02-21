@@ -130,6 +130,10 @@ body {
     color: #323130;
 }
 
+.emailDate {
+    color: #605e5c;
+}
+
 .emailAuthor {
     font-size: 12px;
 }
