@@ -65,6 +65,10 @@ function App() {
         const postSelfText = document.getElementById(redditPostID).dataset.selftext;
         document.getElementById("selftext").innerHTML = postSelfText;
 
+        /* Displays Reddit post URL */
+        const postURL = document.getElementById(redditPostID).dataset.url;
+        document.getElementById("url").href = postURL;
+
         /* Displays Reddit post created date and Time */
         const postCreatedTime = document.getElementById(redditPostID).dataset.created;
         document.getElementById("created").innerHTML = postCreatedTime;
@@ -113,8 +117,6 @@ function App() {
 
                     {/* Listed Posts */}
                     {posts.map((post) => {
-                        /* const length = 10; */
-
                         const title = post.data.title;
                         const id = post.data.id;
                         const url = post.data.url;
@@ -132,7 +134,6 @@ function App() {
                             <div onClick={fetchPost} id={id} data-url={url} data-permalink={permalink} data-title={title} data-author={author} data-subreddit={subReddit} data-thumbnail={thumbnail} data-created={created} data-selftext={selfText} className="email">
                                 <p className="emailTitle">{truncateTitle}</p>
                                 <p>{author}</p>
-                                {/*  <p>{created}</p> */}
                                 <p className="emailSubreddit">{subReddit}</p>
                             </div>
                         );
@@ -145,10 +146,11 @@ function App() {
                         <div class="selectedEmail_Body">
                             <div className="selectedEmail_Info">
                                 <div>
-                                    <img src="" id="thumbnail" className="selectedEmail_Thumbnail" />
+                                    <a href="" id="url" target="_blank">
+                                        <img src="" id="thumbnail" className="selectedEmail_Thumbnail" />
+                                    </a>
                                 </div>
                                 <div>
-                                    {" "}
                                     <p id="author"></p>
                                     <p id="created" className="emailDate"></p>
                                     <p>
@@ -158,6 +160,7 @@ function App() {
                             </div>
 
                             <p id="selftext"></p>
+
                             {comments.map((post) => {
                                 const redditPostComments = post.data.body;
 
