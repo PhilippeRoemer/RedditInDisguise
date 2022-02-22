@@ -175,3 +175,11 @@ body {
     border-radius: 50%;
     margin-right: 15px;
 }
+
+.showDiv {
+    display: block;
+}
+
+.hideDiv {
+    display: none;
+}

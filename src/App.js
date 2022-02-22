@@ -13,6 +13,7 @@ import redditLink from "../src/images/redditLink.png";
 function App() {
     const [posts, setPosts] = useState([]);
     const [comments, setComments] = useState([]);
+    const [emailFetched, setEmailFetched] = useState(false);
 
     useEffect(() => {
         axios
@@ -27,6 +28,7 @@ function App() {
     }, []);
 
     const fetchPost = (e) => {
+        setEmailFetched(true);
         /* Selects the Reddit post ID */
         const redditPostID = e.currentTarget.id;
         console.log(redditPostID);
@@ -74,11 +76,6 @@ function App() {
                 setComments(res.data[1].data.children);
                 console.log("Post Top Comment: " + res.data[1].data.children[0].data.body);
                 console.log("Comment Reply: " + res.data[1].data.children[0].data.replies.data.children[0].data.body);
-
-                /*const Testing = res.data[1].data.children;
-                Testing.forEach((rpost) => {
-                    console.log(rpost);
-                }); */
             })
             .catch((errors) => {
                 console.error(errors);
@@ -86,12 +83,6 @@ function App() {
 
         console.log("Testing");
     };
-
-    /*    const fetchPosts = (e) => {
-        var animalType = e.target.getAttribute("data-idd");
-        console.log(animalType);
-        console.log("Testing");
-    }; */
 
     return (
         <div className="App">
@@ -148,35 +139,35 @@ function App() {
                     })}
                 </div>
 
-                <div class="selectedEmail">
-                    <p class="selectedEmail_Title" id="displayPostTitle">
-                        New Email!
-                    </p>
-                    <div class="selectedEmail_Body">
-                        <div className="selectedEmail_Info">
-                            <div>
-                                <img src="" id="thumbnail" className="selectedEmail_Thumbnail" />
+                <div class="selectedEmail" id="post">
+                    <div className={emailFetched === true ? "showDiv" : "hideDiv"}>
+                        <p class="selectedEmail_Title" id="displayPostTitle"></p>
+                        <div class="selectedEmail_Body">
+                            <div className="selectedEmail_Info">
+                                <div>
+                                    <img src="" id="thumbnail" className="selectedEmail_Thumbnail" />
+                                </div>
+                                <div>
+                                    {" "}
+                                    <p id="author"></p>
+                                    <p id="created" className="emailDate"></p>
+                                    <p>
+                                        To: <span id="subReddit"></span>
+                                    </p>
+                                </div>
                             </div>
-                            <div>
-                                {" "}
-                                <p id="author"></p>
-                                <p id="created" className="emailDate"></p>
-                                <p>
-                                    To: <span id="subReddit"></span>
-                                </p>
-                            </div>
+
+                            <p id="selftext"></p>
+                            {comments.map((post) => {
+                                const redditPostComments = post.data.body;
+
+                                return (
+                                    <ul>
+                                        <li>{redditPostComments}</li>
+                                    </ul>
+                                );
+                            })}
                         </div>
-
-                        <p id="selftext"></p>
-                        {comments.map((post) => {
-                            const redditPostComments = post.data.body;
-
-                            return (
-                                <ul>
-                                    <li>{redditPostComments}</li>
-                                </ul>
-                            );
-                        })}
                     </div>
                 </div>
             </div>
