@@ -17,7 +17,7 @@ function App() {
 
     useEffect(() => {
         axios
-            .get("https://www.reddit.com/.json")
+            .get("https://www.reddit.com/r/worldnews/.json")
             .then((res) => {
                 console.log(res.data.data.children);
                 setPosts(res.data.data.children);
