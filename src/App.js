@@ -14,6 +14,7 @@ function App() {
     const [posts, setPosts] = useState([]);
     const [comments, setComments] = useState([]);
     const [emailFetched, setEmailFetched] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
     useEffect(() => {
         axios
@@ -88,6 +89,11 @@ function App() {
         console.log("Testing");
     };
 
+    const fetchReplies = (e) => {
+        console.log("Testing222");
+        console.log(e);
+    };
+
     return (
         <div className="App">
             <div className="header">
@@ -110,7 +116,31 @@ function App() {
 
             <div class="emailContainer">
                 <div class="emailFolders">
-                    <img src={foldersImage} />
+                    <div className="folders" onClick={() => setIsOpen(!isOpen)}>
+                        <p>Folders</p>
+                    </div>
+                    {isOpen && (
+                        <div>
+                            <div className="folder" title="World News">
+                                <p>Inbox</p>
+                            </div>
+                            <div className="folder" title="News">
+                                <p>Drafts</p>
+                            </div>
+                            <div className="folder" title="Jokes">
+                                <p>Sent Items</p>
+                            </div>
+                            <div className="folder" title="Ask Reddit">
+                                <p>Scheduled</p>
+                            </div>
+                            <div className="folder" title="Politics">
+                                <p>Deleted Items</p>
+                            </div>
+                            <div className="folder" title="Life Pro Tips">
+                                <p>Junk Email</p>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div class="emails">
                     <img src={emailFilter} />
@@ -163,10 +193,14 @@ function App() {
 
                             {comments.map((post) => {
                                 const redditPostComments = post.data.body;
+                                const parentId = post.data.id;
+                                const repliess = post.data;
 
                                 return (
                                     <ul>
-                                        <li>{redditPostComments}</li>
+                                        <li onClick={fetchReplies} id={parentId} data-replies={repliess}>
+                                            {redditPostComments}
+                                        </li>
                                     </ul>
                                 );
                             })}
