@@ -120,11 +120,13 @@ body {
 }
 
 .folder {
-    color: #201f1e;
+    color: #605e5c;
     font-weight: 400;
     font-size: 15px;
     padding: 10px;
     padding-left: 90px;
+    display: flex;
+    align-items: center;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -136,6 +138,12 @@ body {
 .folder:hover {
     background-color: #edebe9;
     cursor: pointer;
+    color: #201f1e;
+}
+
+.outlookFolderIcon {
+    height: 20px;
+    margin-right: 5px;
 }
 
 .emails {

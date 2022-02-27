@@ -7,8 +7,13 @@ import searchIcon from "../src/images/searchIcon.png";
 import profileImage from "../src/images/profileImage.png";
 import emailButtons from "../src/images/emailButtons.png";
 import emailFilter from "../src/images/emailFilter.jpg";
-import foldersImage from "../src/images/foldersImage.png";
 import redditLink from "../src/images/redditLink.png";
+import inboxIcon from "../src/images/OutlookIcons/Inbox.png";
+import draftIcon from "../src/images/OutlookIcons/Drafts.png";
+import deletedIcon from "../src/images/OutlookIcons/Deleted.png";
+import junkIcon from "../src/images/OutlookIcons/Junk.png";
+import scheduledIcon from "../src/images/OutlookIcons/Scheduled.png";
+import sentIcon from "../src/images/OutlookIcons/Sent.png";
 
 function App() {
     const [posts, setPosts] = useState([]);
@@ -128,21 +133,27 @@ function App() {
                     {isOpen && (
                         <div>
                             <div className="folder" title="World News" onClick={() => setSubReddit("worldnews")}>
+                                <img src={inboxIcon} className="outlookFolderIcon" />
                                 <p>Inbox</p>
                             </div>
                             <div className="folder" title="News" onClick={() => setSubReddit("news")}>
+                                <img src={draftIcon} className="outlookFolderIcon" />
                                 <p>Drafts</p>
                             </div>
                             <div className="folder" title="Jokes" onClick={() => setSubReddit("jokes")}>
+                                <img src={sentIcon} className="outlookFolderIcon" />
                                 <p>Sent Items</p>
                             </div>
                             <div className="folder" title="Ask Reddit" onClick={() => setSubReddit("askreddit")}>
+                                <img src={scheduledIcon} className="outlookFolderIcon" />
                                 <p>Scheduled</p>
                             </div>
                             <div className="folder" title="Politics" onClick={() => setSubReddit("politics")}>
+                                <img src={deletedIcon} className="outlookFolderIcon" />
                                 <p>Deleted Items</p>
                             </div>
                             <div className="folder" title="Life Pro Tips" onClick={() => setSubReddit("lifeprotips")}>
+                                <img src={junkIcon} className="outlookFolderIcon" />
                                 <p>Junk Email</p>
                             </div>
                         </div>
