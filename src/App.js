@@ -15,10 +15,16 @@ function App() {
     const [comments, setComments] = useState([]);
     const [emailFetched, setEmailFetched] = useState(false);
     const [isOpen, setIsOpen] = useState(true);
+    const [subReddit, setSubReddit] = useState([]);
+
+    /* Sets World News subreddit posts on page load */
+    useEffect(() => {
+        setSubReddit("worldnews");
+    }, []);
 
     useEffect(() => {
         axios
-            .get("https://www.reddit.com/r/worldnews/.json")
+            .get("https://www.reddit.com/r/" + subReddit + "/.json")
             .then((res) => {
                 console.log(res.data.data.children);
                 setPosts(res.data.data.children);
@@ -26,7 +32,7 @@ function App() {
             .catch((errors) => {
                 console.error(errors);
             });
-    }, []);
+    }, [subReddit]);
 
     const fetchPost = (e) => {
         setEmailFetched(true);
@@ -121,22 +127,22 @@ function App() {
                     </div>
                     {isOpen && (
                         <div>
-                            <div className="folder" title="World News">
+                            <div className="folder" title="World News" onClick={() => setSubReddit("worldnews")}>
                                 <p>Inbox</p>
                             </div>
-                            <div className="folder" title="News">
+                            <div className="folder" title="News" onClick={() => setSubReddit("news")}>
                                 <p>Drafts</p>
                             </div>
-                            <div className="folder" title="Jokes">
+                            <div className="folder" title="Jokes" onClick={() => setSubReddit("jokes")}>
                                 <p>Sent Items</p>
                             </div>
-                            <div className="folder" title="Ask Reddit">
+                            <div className="folder" title="Ask Reddit" onClick={() => setSubReddit("askreddit")}>
                                 <p>Scheduled</p>
                             </div>
-                            <div className="folder" title="Politics">
+                            <div className="folder" title="Politics" onClick={() => setSubReddit("politics")}>
                                 <p>Deleted Items</p>
                             </div>
-                            <div className="folder" title="Life Pro Tips">
+                            <div className="folder" title="Life Pro Tips" onClick={() => setSubReddit("lifeprotips")}>
                                 <p>Junk Email</p>
                             </div>
                         </div>
