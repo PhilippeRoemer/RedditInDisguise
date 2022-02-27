@@ -102,6 +102,12 @@ function App() {
         console.log("Testing");
     };
 
+    const searchSubreddit = () => {
+        const subreddit = document.getElementById("subReddit").value;
+        console.log(subreddit);
+        setSubReddit(subreddit);
+    };
+
     const fetchReplies = (e) => {
         console.log("Testing222");
         console.log(e);
@@ -114,8 +120,8 @@ function App() {
                     <img src={waffleIcon} className="waffleIcon" />
                     <h3 className="outlookIcon">Outlook</h3>
                     <div className="searchbarContainer">
-                        <input type="text" placeholder="Search" className="searchbar" />
-                        <img src={searchIcon} className="searchIcon" />
+                        <input type="text" placeholder="Search" className="searchbar" id="subReddit" />
+                        <img src={searchIcon} className="searchIcon" onClick={searchSubreddit} />
                     </div>
                 </div>
                 <div>
