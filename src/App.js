@@ -14,6 +14,8 @@ import deletedIcon from "../src/images/OutlookIcons/Deleted.png";
 import junkIcon from "../src/images/OutlookIcons/Junk.png";
 import scheduledIcon from "../src/images/OutlookIcons/Scheduled.png";
 import sentIcon from "../src/images/OutlookIcons/Sent.png";
+import downCaretIcon from "../src/images/OutlookIcons/downCaret.png";
+import sideCaretIcon from "../src/images/OutlookIcons/sideCaret.png";
 
 function App() {
     const [posts, setPosts] = useState([]);
@@ -128,6 +130,7 @@ function App() {
             <div class="emailContainer">
                 <div class="emailFolders">
                     <div className="folders" onClick={() => setIsOpen(!isOpen)}>
+                        {isOpen ? <img src={downCaretIcon} className="foldersCaret" /> : <img src={sideCaretIcon} className="foldersCaret" />}
                         <p>Folders</p>
                     </div>
                     {isOpen && (

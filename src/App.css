@@ -106,6 +106,8 @@ body {
     padding: 10px;
     padding-left: 60px;
     font-weight: 600;
+    display: flex;
+    align-items: center;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -117,6 +119,11 @@ body {
 .folders:hover {
     background-color: #edebe9;
     cursor: pointer;
+}
+
+.foldersCaret {
+    height: 20px;
+    margin-right: 5px;
 }
 
 .folder {
