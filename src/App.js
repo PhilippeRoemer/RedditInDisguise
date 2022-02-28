@@ -103,7 +103,7 @@ function App() {
     };
 
     const searchSubreddit = () => {
-        const subreddit = document.getElementById("subReddit").value;
+        const subreddit = document.getElementById("SubReddit").value;
         console.log(subreddit);
         setSubReddit(subreddit);
     };
@@ -120,7 +120,7 @@ function App() {
                     <img src={waffleIcon} className="waffleIcon" />
                     <h3 className="outlookIcon">Outlook</h3>
                     <div className="searchbarContainer">
-                        <input type="text" placeholder="Search" className="searchbar" id="subReddit" />
+                        <input type="text" placeholder="Search" className="searchbar" id="SubReddit" />
                         <img src={searchIcon} className="searchIcon" onClick={searchSubreddit} />
                     </div>
                 </div>
