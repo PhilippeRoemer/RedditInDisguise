@@ -16,6 +16,7 @@ import scheduledIcon from "../src/images/OutlookIcons/Scheduled.png";
 import sentIcon from "../src/images/OutlookIcons/Sent.png";
 import downCaretIcon from "../src/images/OutlookIcons/downCaret.png";
 import sideCaretIcon from "../src/images/OutlookIcons/sideCaret.png";
+import itemIcon from "../src/images/SelectItemIcon.png";
 
 function App() {
     const [posts, setPosts] = useState([]);
@@ -94,6 +95,11 @@ function App() {
                 setComments(res.data[1].data.children);
                 console.log("Post Top Comment: " + res.data[1].data.children[0].data.body);
                 console.log("Comment Reply: " + res.data[1].data.children[0].data.replies.data.children[0].data.body);
+
+                /*const Testing = res.data[1].data.children;
+                Testing.forEach((rpost) => {
+                    console.log(rpost);
+                }); */
             })
             .catch((errors) => {
                 console.error(errors);
@@ -111,7 +117,14 @@ function App() {
     const fetchReplies = (e) => {
         console.log("Testing222");
         console.log(e);
+        /*    const testingg = dataset.replies; */
     };
+
+    /*    const fetchPosts = (e) => {
+        var animalType = e.target.getAttribute("data-idd");
+        console.log(animalType);
+        console.log("Testing");
+    }; */
 
     return (
         <div className="App">
@@ -124,7 +137,7 @@ function App() {
                         <img src={searchIcon} className="searchIcon" onClick={searchSubreddit} />
                     </div>
                 </div>
-                <div>
+                <div className="profileSection">
                     <img src={OutlookMenuBar} className="outlookMenuIcons" />
                     <img src={profileImage} className="profileImage" />
                 </div>
@@ -173,6 +186,8 @@ function App() {
 
                     {/* Listed Posts */}
                     {posts.map((post) => {
+                        /* const length = 10; */
+
                         const title = post.data.title;
                         const id = post.data.id;
                         const url = post.data.url;
@@ -190,6 +205,7 @@ function App() {
                             <div onClick={fetchPost} id={id} data-url={url} data-permalink={permalink} data-title={title} data-author={author} data-subreddit={subReddit} data-thumbnail={thumbnail} data-created={created} data-selftext={selfText} className="email">
                                 <p className="emailTitle">{truncateTitle}</p>
                                 <p>{author}</p>
+                                {/*  <p>{created}</p> */}
                                 <p className="emailSubreddit">{subReddit}</p>
                             </div>
                         );
@@ -197,6 +213,7 @@ function App() {
                 </div>
 
                 <div class="selectedEmail" id="post">
+                    <img src={itemIcon} className={emailFetched === false ? "selectItemIcon" : "hideDiv"} />
                     <div className={emailFetched === true ? "showDiv" : "hideDiv"}>
                         <p class="selectedEmail_Title" id="displayPostTitle"></p>
                         <div class="selectedEmail_Body">
@@ -215,7 +232,7 @@ function App() {
                                 </div>
                             </div>
 
-                            <p id="selftext"></p>
+                            <p id="selftext" className="selectedEmail_SelfText"></p>
 
                             {comments.map((post) => {
                                 const redditPostComments = post.data.body;

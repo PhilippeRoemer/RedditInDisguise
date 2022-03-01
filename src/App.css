@@ -67,6 +67,10 @@ body {
     background-color: #fff;
 }
 
+.profileSection {
+    min-width: 480px;
+}
+
 .outlookMenuIcons {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -156,6 +160,7 @@ body {
 
 .emails {
     width: 370px;
+    min-width: 370px;
     border-right: 1px solid #edebe9;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -163,6 +168,9 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100vh;
 }
 
 .email {
@@ -194,6 +202,12 @@ body {
 
 .emailSubreddit {
     color: #605e5c;
+}
+
+.selectItemIcon {
+    display: block;
+    margin: auto;
+    margin-top: 25vh;
 }
 
 .selectedEmail {
@@ -228,6 +242,9 @@ body {
     height: 32px;
     border-radius: 50%;
     margin-right: 15px;
+}
+.selectedEmail_SelfText {
+    margin-left: 15px;
 }
 
 .showDiv {
