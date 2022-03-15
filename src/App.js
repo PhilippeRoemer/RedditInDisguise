@@ -55,9 +55,10 @@ function App() {
         const permaLink = document.getElementById(redditPostID).dataset.permalink;
         console.log("https://www.reddit.com" + permaLink + ".json");
 
-        /* Displays Reddit post title */
+        /* Displays Reddit post title and upvotes*/
         const postTitle = document.getElementById(redditPostID).dataset.title;
-        document.getElementById("displayPostTitle").innerHTML = postTitle;
+        const postUpVotes = document.getElementById(redditPostID).dataset.upvotes;
+        document.getElementById("displayPostTitle").innerHTML = "<span>&#8679;</span> " + postUpVotes + ": " + postTitle;
 
         /* Displays Reddit post author */
         const postAuthor = document.getElementById(redditPostID).dataset.author;
@@ -95,11 +96,6 @@ function App() {
                 setComments(res.data[1].data.children);
                 console.log("Post Top Comment: " + res.data[1].data.children[0].data.body);
                 console.log("Comment Reply: " + res.data[1].data.children[0].data.replies.data.children[0].data.body);
-
-                /*const Testing = res.data[1].data.children;
-                Testing.forEach((rpost) => {
-                    console.log(rpost);
-                }); */
             })
             .catch((errors) => {
                 console.error(errors);
@@ -117,14 +113,7 @@ function App() {
     const fetchReplies = (e) => {
         console.log("Testing222");
         console.log(e);
-        /*    const testingg = dataset.replies; */
     };
-
-    /*    const fetchPosts = (e) => {
-        var animalType = e.target.getAttribute("data-idd");
-        console.log(animalType);
-        console.log("Testing");
-    }; */
 
     return (
         <div className="App">
@@ -186,8 +175,6 @@ function App() {
 
                     {/* Listed Posts */}
                     {posts.map((post) => {
-                        /* const length = 10; */
-
                         const title = post.data.title;
                         const id = post.data.id;
                         const url = post.data.url;
@@ -196,16 +183,16 @@ function App() {
                         const subReddit = post.data.subreddit_name_prefixed;
                         const thumbnail = post.data.thumbnail;
                         const selfText = post.data.selftext;
+                        const upVotes = post.data.ups;
                         const epochTime = new Date(post.data.created * 1000);
 
                         const created = epochTime.toLocaleTimeString("en-US", { weekday: "short", year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", hour12: true });
 
                         const truncateTitle = title.substring(0, 45) + "...";
                         return (
-                            <div onClick={fetchPost} id={id} data-url={url} data-permalink={permalink} data-title={title} data-author={author} data-subreddit={subReddit} data-thumbnail={thumbnail} data-created={created} data-selftext={selfText} className="email">
+                            <div onClick={fetchPost} id={id} data-url={url} data-permalink={permalink} data-title={title} data-author={author} data-subreddit={subReddit} data-thumbnail={thumbnail} data-created={created} data-selftext={selfText} data-upvotes={upVotes} className="email">
                                 <p className="emailTitle">{truncateTitle}</p>
                                 <p>{author}</p>
-                                {/*  <p>{created}</p> */}
                                 <p className="emailSubreddit">{subReddit}</p>
                             </div>
                         );
