@@ -58,7 +58,11 @@ function App() {
         /* Displays Reddit post title and upvotes*/
         const postTitle = document.getElementById(redditPostID).dataset.title;
         const postUpVotes = document.getElementById(redditPostID).dataset.upvotes;
-        document.getElementById("displayPostTitle").innerHTML = "<span>&#8679;</span> " + postUpVotes + ": " + postTitle;
+        if (postUpVotes > 999) {
+            document.getElementById("displayPostTitle").innerHTML = "<span>&#8679;</span> " + postUpVotes.substring(0, 1) + "k: " + postTitle;
+        } else {
+            document.getElementById("displayPostTitle").innerHTML = "<span>&#8679;</span> " + postUpVotes + ": " + postTitle;
+        }
 
         /* Displays Reddit post author */
         const postAuthor = document.getElementById(redditPostID).dataset.author;
